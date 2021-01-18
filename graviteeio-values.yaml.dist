@@ -1,0 +1,164 @@
+chaos:
+  enabled: false
+
+graviteeRepoAuth:
+  enabled: true
+
+inMemoryAuth:
+  enabled: true
+  allowEmailInSearchResults: false
+
+# Default password "admin", use bcrypt ($2a$ version) to generate a new one
+adminPasswordBcrypt: $2a$10$Ihk05VSds5rUSgMdsMVi9OKMIx2yUvMz7y9VP3rJmQeizZLrhLMyq
+adminEmail: -- YOUR OWN EMAIL --
+adminFirstName: 
+adminLastName: 
+
+jwtSecret: myJWT4Gr4v1t33_S3cr3t
+
+# Define extra inMemory users here or disable the default ones here
+extraInMemoryUsers: |
+  - user:
+    username: user
+    # Password value: password
+    password: $2a$10$9kjw/SH9gucCId3Lnt6EmuFreUAcXSZgpvAYuW2ISv7hSOhHRH1AO
+    roles: ORGANIZATION:USER, ENVIRONMENT:USER
+    # Useful to receive notifications
+  - user:
+    username: api1
+    # Password value: api1
+    password: $2a$10$iXdXO4wAYdhx2LOwijsp7.PsoAZQ05zEdHxbriIYCbtyo.y32LTji
+    # You can declare multiple roles using comma separator
+    roles: ORGANIZATION:USER, ENVIRONMENT:API_PUBLISHER
+  - user:
+    username: application1
+    # Password value: application1
+    password: $2a$10$2gtKPYRB9zaVaPcn5RBx/.3T.7SeZoDGs9GKqbo9G64fKyXFR1He.
+    roles: ORGANIZATION:USER, ENVIRONMENT:USER
+
+ldap:
+  enabled: false
+  
+security:
+  providers: []
+
+oidcAuth:
+  enabled: false
+
+smtp:
+  enabled: false
+
+notifiers:
+  smtp:
+    enabled: false
+mongodb-replicaset:
+  enabled: false
+
+es:
+  enabled: true
+  endpoints:
+    - http://es.graviteeio.svc.cluster.local:9200
+
+elasticsearch:
+  enabled: false
+ 
+alerts:
+  enabled: false
+
+api:
+  enabled: true
+  autoscaling:
+    enabled: true
+  replicaCount: 1
+  image:
+    repository: medinvention/gravitee-management-api
+  http:
+    services:
+      core:
+        http:
+          port: 18083
+          host: localhost
+          authentication:
+            password: adminadmin  
+        ingress:
+          enabled: false
+        service: 
+          enabled: false
+    api:
+      entrypoint: /
+  ingress:
+    management:
+      enabled: true
+      path: /management
+      hosts:
+        - api.medinvention.dev
+      tls:
+        - hosts:
+            - api.medinvention.dev
+          secretName: api-tls
+    portal:
+      enabled: true
+      path: /portal
+      hosts:
+        - api.medinvention.dev
+      tls:
+        - hosts:
+            - api.medinvention.dev
+          secretName: api-tls
+
+gateway:
+  enabled: true
+  autoscaling:
+    enabled: true
+  replicaCount: 1
+  image:
+    repository: medinvention/gravitee-gateway
+    pullPolicy: Always
+  ingress:
+    enabled: true
+    path: /gateway
+    hosts:
+      - api.medinvention.dev
+    tls:
+      - hosts:
+          - api.medinvention.dev
+        secretName: api-tls
+
+portal:
+  enabled: true
+  name: portal
+  replicaCount: 1
+  autoscaling:
+    enabled: false
+  image:
+    repository: medinvention/gravitee-portal-ui
+    pullPolicy: Always
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - api.medinvention.dev
+    tls:
+      - hosts:
+          - api.medinvention.dev
+        secretName: api-tls
+
+ui:
+  enabled: true
+  autoscaling:
+    enabled: true
+  replicaCount: 1
+  image:
+    repository: medinvention/gravitee-management-ui
+    pullPolicy: Always
+  ingress:
+    enabled: true
+    hosts:
+      - api.medinvention.dev
+    tls:
+      - hosts:
+          - api.medinvention.dev
+        secretName: api-tls
+
+mongo:
+  uri: mongodb://mongo.graviteeio.svc.cluster.local:27017
