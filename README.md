@@ -34,7 +34,7 @@ Gravitee Component:
 - Install ``helm install -f graviteeio-values.yaml -n graviteeio graviteeio apim3\``
 
 
-**NOTA** : For Management and Portal image building, a Confd binary is used, it's loaded from Docker contex,t [builded for armhf with v0.16.0](https://github.com/kelseyhightower/confd/tree/v0.16.0) 
+**NOTA** : For Management and Portal image building, a Confd binary is used, it's loaded from Docker context, [builded for armhf with v0.16.0](https://github.com/kelseyhightower/confd/tree/v0.16.0) 
 
 ---- 
 
