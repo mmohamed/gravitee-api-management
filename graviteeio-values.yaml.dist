@@ -161,4 +161,4 @@ ui:
         secretName: api-tls
 
 mongo:
-  uri: mongodb://mongo.graviteeio.svc.cluster.local:27017
+  uri: mongodb://mongo.graviteeio.svc.cluster.local:27017/gravitee
