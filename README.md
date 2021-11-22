@@ -1,7 +1,7 @@
 # Gravitee API Management for k8S and armhf
 
 <p align="center">
-<img src="https://demo.gravitee.io/themes/assets/GRAVITEE_LOGO1-01.png" width="250">
+<img src="https://repository-images.githubusercontent.com/36487440/95afc980-62e1-11e9-9060-8c0ee67677a1" width="250">
 </p>
 
 ----
