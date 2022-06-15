@@ -1,4 +1,4 @@
-FROM nginx:1.19.6
+FROM nginx:1.22
 
 ARG GRAVITEEIO_VERSION=3.4.2
 ARG GRAVITEEIO_DOWNLOAD_URL=https://download.gravitee.io/graviteeio-apim/distributions
